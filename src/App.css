@@ -20,3 +20,12 @@ label {
 .address {
   margin-top: 10px;
 }
+
+input,
+select {
+  color: black;
+}
+
+button {
+  color: black;
+}

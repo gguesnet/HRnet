@@ -3,10 +3,23 @@ import { Link } from "react-router-dom";
 function Form() {
   async function handleOnSubmit(e) {
     e.preventDefault();
+
     const form = new FormData(e.target);
-    const data = {};
+    const user = window.localStorage.getItem("user");
+    let count;
+
+    if (!user) {
+      count = 1;
+    } else {
+      count = JSON.parse(user).length + 1;
+    }
+
+    const data = { id: count };
+
+    console.log(count);
 
     form.forEach((item, i) => {
+      console.log(item, i);
       let input = { [i]: item };
       Object.assign(data, input);
     });

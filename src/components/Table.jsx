@@ -1,45 +1,34 @@
 import { Link } from "react-router-dom";
+import { DataGrid } from "@mui/x-data-grid";
+
+const data = JSON.parse(window.localStorage.getItem("user")) || undefined;
+const columns = [
+  { field: "firstname", headerName: "First name", width: 100 },
+  { field: "lastname", headerName: "Last name", width: 100 },
+  { field: "startdate", headerName: "Start date", width: 100 },
+  { field: "department", headerName: "Department", width: 100 },
+  { field: "birthdate", headerName: "Birth Date", width: 100 },
+  { field: "street", headerName: "Last name", width: 100 },
+  { field: "city", headerName: "City", width: 100 },
+  { field: "zipcode", headerName: "Zipcode", width: 100 },
+];
+
+const rows = [...data];
 
 function Table() {
-  const data = JSON.parse(window.localStorage.getItem("user")) || undefined;
   return (
     <div className="App">
       <div className="container">
         <h2>Current Employees</h2>
-        <table id="employee-table" className="display">
-          <thead>
-            <tr>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Start Date</th>
-              <th>Department</th>
-              <th>Date of Birth</th>
-              <th>Street</th>
-              <th>City</th>
-              <th>State</th>
-              <th>Zipcode</th>
-            </tr>
-          </thead>
-          <tbody id="push">
-            {data ? (
-              data.map((item, i) => (
-                <tr key={i}>
-                  <td>{item.firstname}</td>
-                  <td>{item.lastname}</td>
-                  <td>{item.startdate}</td>
-                  <td>{item.department}</td>
-                  <td>{item.birthdate}</td>
-                  <td>{item.street}</td>
-                  <td>{item.city}</td>
-                  <td>{item.state}</td>
-                  <td>{item.zipcode}</td>
-                </tr>
-              ))
-            ) : (
-              <tr></tr>
-            )}
-          </tbody>
-        </table>
+        <div style={{ height: 400, width: "100%" }}>
+          <DataGrid
+            rows={rows}
+            columns={columns}
+            pageSize={5}
+            rowsPerPageOptions={[5]}
+            checkboxSelection
+          />
+        </div>
         <Link to="/">Home</Link>
       </div>
     </div>
