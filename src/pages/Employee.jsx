@@ -1,11 +1,11 @@
-import { Link } from "react-router-dom";
+import Title from "../components/Title";
+import Table from "../components/Table";
 
 function Employee() {
   return (
-    <div id="employee-div" className="container">
-      <h1>Current Employees</h1>
-      <table id="employee-table" className="display"></table>
-      <Link to="/">Home</Link>
+    <div className="App">
+      <Title title="HRnet" />
+      <Table />
     </div>
   );
 }

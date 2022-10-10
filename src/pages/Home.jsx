@@ -1,11 +1,11 @@
 import Title from "../components/Title";
-import Container from "../components/Container";
+import Form from "../components/Form";
 
 function Home() {
   return (
     <div className="App">
       <Title title="HRnet" />
-      <Container />
+      <Form />
     </div>
   );
 }
