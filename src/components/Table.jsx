@@ -22,8 +22,8 @@ function Table() {
           </thead>
           <tbody id="push">
             {data ? (
-              data.map((item) => (
-                <tr>
+              data.map((item, i) => (
+                <tr key={i}>
                   <td>{item.firstname}</td>
                   <td>{item.lastname}</td>
                   <td>{item.startdate}</td>
