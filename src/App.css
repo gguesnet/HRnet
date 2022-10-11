@@ -23,7 +23,12 @@ label {
 
 input,
 select {
+  background-color: white !important;
   color: black;
+}
+
+ul > li {
+  color: black !important;
 }
 
 button {

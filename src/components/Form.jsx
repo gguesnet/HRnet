@@ -1,10 +1,15 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import Box from "@mui/material/Box";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
 import Typography from "@mui/material/Typography";
+import FormControl from "@mui/material/FormControl";
 import Modal from "@mui/material/Modal";
+import { states } from "../helpers";
 
-const style = {
+const modalStyle = {
   position: "absolute",
   top: "50%",
   left: "50%",
@@ -21,6 +26,12 @@ function Form() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const [stateName, setStateName] = useState(states[0]);
+
+  const handleChange = (e) => {
+    setStateName(e.target.value);
+  };
 
   async function handleOnSubmit(e) {
     e.preventDefault();
@@ -84,8 +95,24 @@ function Form() {
           <label htmlFor="city">City</label>
           <input id="city" name="city" type="text" required />
 
-          <label htmlFor="state">State</label>
-          <select id="state" name="state"></select>
+          <Box>
+            <FormControl fullWidth>
+              <InputLabel id="select-label">State</InputLabel>
+              <Select
+                labelId="select-label"
+                id="demo-simple-select"
+                label="State"
+                value={stateName}
+                onChange={handleChange}
+              >
+                {states.map((state) => (
+                  <MenuItem key={state} value={state}>
+                    {state}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Box>
 
           <label htmlFor="zip-code">Zip Code</label>
           <input
@@ -112,9 +139,8 @@ function Form() {
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
+        <Box sx={modalStyle}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Employee Created!
           </Typography>
