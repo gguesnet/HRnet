@@ -1,6 +1,27 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Modal from "@mui/material/Modal";
+
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 200,
+  bgcolor: "black",
+  border: "2px solid #000",
+  borderRadius: "20px",
+  boxShadow: 24,
+  p: 4,
+};
 
 function Form() {
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   async function handleOnSubmit(e) {
     e.preventDefault();
 
@@ -32,6 +53,7 @@ function Form() {
       window.localStorage.setItem("user", JSON.stringify(storage));
     }
 
+    handleOpen();
     e.target.reset();
   }
 
@@ -85,6 +107,19 @@ function Form() {
         </select>
         <button type="submit">Save</button>
       </form>
+
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Employee Created!
+          </Typography>
+        </Box>
+      </Modal>
     </div>
   );
 }
