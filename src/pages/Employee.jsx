@@ -7,7 +7,7 @@ function Employee() {
   const dispatch = useDispatch();
   const storage = JSON.parse(window.localStorage.getItem("user"));
 
-  dispatch(addEmployee({ employeeList: [...storage] }));
+  dispatch(addEmployee({ employeeList: storage }));
 
   return (
     <div className="App">

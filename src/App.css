@@ -20,17 +20,3 @@ label {
 .address {
   margin-top: 10px;
 }
-
-input,
-select {
-  background-color: white !important;
-  color: black;
-}
-
-ul > li {
-  color: black !important;
-}
-
-button {
-  color: black;
-}

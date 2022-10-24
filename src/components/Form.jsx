@@ -8,6 +8,12 @@ import Typography from "@mui/material/Typography";
 import FormControl from "@mui/material/FormControl";
 import Modal from "@mui/material/Modal";
 import { states } from "../helpers";
+import dayjs from "dayjs";
+import Stack from "@mui/material/Stack";
+import TextField from "@mui/material/TextField";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 
 const modalStyle = {
   position: "absolute",
@@ -15,7 +21,7 @@ const modalStyle = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 200,
-  bgcolor: "black",
+  bgcolor: "white",
   border: "2px solid #000",
   borderRadius: "20px",
   boxShadow: 24,
@@ -26,6 +32,17 @@ function Form() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const [birthValue, setBirthValue] = useState(dayjs());
+  const [startValue, setStartValue] = useState(dayjs());
+
+  const handleChangeBirthPicker = (newValue) => {
+    setBirthValue(newValue);
+  };
+
+  const handleChangeStartPicker = (newValue) => {
+    setStartValue(newValue);
+  };
 
   const [stateName, setStateName] = useState(states[0]);
 
@@ -60,6 +77,7 @@ function Form() {
 
     if (data) {
       const storage = JSON.parse(window.localStorage.getItem("user")) || [];
+      console.log(storage);
       storage.push(data);
       window.localStorage.setItem("user", JSON.stringify(storage));
     }
@@ -80,11 +98,35 @@ function Form() {
         <label htmlFor="last-name">Last Name</label>
         <input id="last-name" name="lastname" type="text" required />
 
-        <label htmlFor="date-of-birth">Date of Birth</label>
-        <input id="date-of-birth" name="birthdate" type="date" required />
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <Stack spacing={3}>
+            <DesktopDatePicker
+              label="Date of Birth"
+              inputFormat="MM/DD/YYYY"
+              value={birthValue}
+              name="birthdate"
+              onChange={handleChangeBirthPicker}
+              renderInput={(params) => (
+                <TextField {...params} name="birthdate" />
+              )}
+            />
+          </Stack>
+        </LocalizationProvider>
 
-        <label htmlFor="start-date">Start Date</label>
-        <input id="start-date" name="startdate" type="date" required />
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <Stack spacing={3}>
+            <DesktopDatePicker
+              label="Start Date"
+              inputFormat="MM/DD/YYYY"
+              value={startValue}
+              name="startdate"
+              onChange={handleChangeStartPicker}
+              renderInput={(params) => (
+                <TextField {...params} name="startdate" />
+              )}
+            />
+          </Stack>
+        </LocalizationProvider>
 
         <fieldset className="address">
           <legend>Address</legend>
@@ -102,6 +144,7 @@ function Form() {
                 labelId="select-label"
                 id="demo-simple-select"
                 label="State"
+                name="state"
                 value={stateName}
                 onChange={handleChange}
               >

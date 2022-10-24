@@ -1,10 +1,5 @@
-* {
-  color: white;
-}
-
 body {
   margin: 0;
   box-sizing: border-box;
-  background-color: #0c2d41;
   font-family: Roboto, Helvetica, Arial, sans-serif;
 }

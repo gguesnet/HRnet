@@ -1,21 +1,26 @@
 import { Link } from "react-router-dom";
 import { DataGrid } from "@mui/x-data-grid";
+import { store } from "../redux";
 
-const data = JSON.parse(window.localStorage.getItem("user")) || undefined;
 const columns = [
   { field: "firstname", headerName: "First name", width: 100 },
   { field: "lastname", headerName: "Last name", width: 100 },
   { field: "startdate", headerName: "Start date", width: 100 },
   { field: "department", headerName: "Department", width: 100 },
   { field: "birthdate", headerName: "Birth Date", width: 100 },
-  { field: "street", headerName: "Last name", width: 100 },
+  { field: "street", headerName: "Street", width: 100 },
   { field: "city", headerName: "City", width: 100 },
+  { field: "state", headerName: "State", width: 100 },
   { field: "zipcode", headerName: "Zipcode", width: 100 },
 ];
 
-const rows = [...data];
-
 function Table() {
+  const data = store.getState().employeeDataHandler.employeeList;
+
+  console.log(data);
+
+  const rows = data;
+
   return (
     <div className="App">
       <div className="container">
@@ -24,8 +29,8 @@ function Table() {
           <DataGrid
             rows={rows}
             columns={columns}
-            pageSize={5}
-            rowsPerPageOptions={[5]}
+            pageSize={30}
+            rowsPerPageOptions={[30]}
             checkboxSelection
           />
         </div>
