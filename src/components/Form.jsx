@@ -1,54 +1,19 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import Box from "@mui/material/Box";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import Select from "@mui/material/Select";
-import Typography from "@mui/material/Typography";
-import FormControl from "@mui/material/FormControl";
-import Modal from "@mui/material/Modal";
-import { states } from "../helpers";
-import dayjs from "dayjs";
-import Stack from "@mui/material/Stack";
-import TextField from "@mui/material/TextField";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
+import { states, departments } from "../helpers";
+import TextInput from "./TextInput";
+import SelectInput from "./SelectInput";
+import DateInput from "./DateInput";
+import SuccessModal from "./SuccessModal";
 
-const modalStyle = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 200,
-  bgcolor: "white",
-  border: "2px solid #000",
-  borderRadius: "20px",
-  boxShadow: 24,
-  p: 4,
-};
+function useToggle(defaultValue = false) {
+  const [value, setValue] = useState(defaultValue);
+  const toggleValue = () => setValue((prevValue) => !prevValue);
+  return [value, toggleValue];
+}
 
 function Form() {
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
-  const [birthValue, setBirthValue] = useState(dayjs());
-  const [startValue, setStartValue] = useState(dayjs());
-
-  const handleChangeBirthPicker = (newValue) => {
-    setBirthValue(newValue);
-  };
-
-  const handleChangeStartPicker = (newValue) => {
-    setStartValue(newValue);
-  };
-
-  const [stateName, setStateName] = useState(states[0]);
-
-  const handleChange = (e) => {
-    setStateName(e.target.value);
-  };
+  const [isVisible, toggle] = useToggle();
 
   async function handleOnSubmit(e) {
     e.preventDefault();
@@ -82,7 +47,7 @@ function Form() {
       window.localStorage.setItem("user", JSON.stringify(storage));
     }
 
-    handleOpen();
+    toggle();
     e.target.reset();
   }
 
@@ -92,103 +57,77 @@ function Form() {
       <h2>Create Employee</h2>
 
       <form action="#" id="create-employee" onSubmit={handleOnSubmit}>
-        <label htmlFor="first-name">First Name</label>
-        <input id="first-name" name="firstname" type="text" required />
+        <TextInput
+          id="firstname"
+          label="First Name"
+          minlength={1}
+          maxlength={17}
+          name="firstname"
+          type="text"
+        />
 
-        <label htmlFor="last-name">Last Name</label>
-        <input id="last-name" name="lastname" type="text" required />
+        <TextInput
+          id="lastname"
+          label="Last Name"
+          minlength={1}
+          maxlength={17}
+          name="lastname"
+          type="text"
+        />
 
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <Stack spacing={3}>
-            <DesktopDatePicker
-              label="Date of Birth"
-              inputFormat="MM/DD/YYYY"
-              value={birthValue}
-              name="birthdate"
-              onChange={handleChangeBirthPicker}
-              renderInput={(params) => (
-                <TextField {...params} name="birthdate" />
-              )}
-            />
-          </Stack>
-        </LocalizationProvider>
+        <DateInput label="Date of Birth" name="birthdate" />
 
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <Stack spacing={3}>
-            <DesktopDatePicker
-              label="Start Date"
-              inputFormat="MM/DD/YYYY"
-              value={startValue}
-              name="startdate"
-              onChange={handleChangeStartPicker}
-              renderInput={(params) => (
-                <TextField {...params} name="startdate" />
-              )}
-            />
-          </Stack>
-        </LocalizationProvider>
+        <DateInput label="Start Date" name="startdate" />
 
-        <fieldset className="address">
+        <fieldset>
           <legend>Address</legend>
 
-          <label htmlFor="street">Street</label>
-          <input id="street" name="street" type="text" required />
+          <TextInput
+            id="street"
+            label="Street"
+            minlength={1}
+            maxlength={17}
+            name="street"
+            type="text"
+          />
 
-          <label htmlFor="city">City</label>
-          <input id="city" name="city" type="text" required />
+          <TextInput
+            id="city"
+            label="City"
+            minlength={1}
+            maxlength={17}
+            name="city"
+            type="text"
+          />
 
-          <Box>
-            <FormControl fullWidth>
-              <InputLabel id="select-label">State</InputLabel>
-              <Select
-                labelId="select-label"
-                id="demo-simple-select"
-                label="State"
-                name="state"
-                value={stateName}
-                onChange={handleChange}
-              >
-                {states.map((state) => (
-                  <MenuItem key={state} value={state}>
-                    {state}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </Box>
+          <SelectInput
+            id="select-state"
+            label="State"
+            name="state"
+            data={states}
+          />
 
-          <label htmlFor="zip-code">Zip Code</label>
-          <input
-            id="zip-code"
+          <TextInput
+            id="zipcode"
+            label="Zip Code"
+            minlength={5}
+            maxlength={5}
             name="zipcode"
             type="text"
-            pattern="[0-9]*"
-            required
           />
         </fieldset>
 
-        <label htmlFor="department">Department</label>
-        <select id="department" name="department">
-          <option>Sales</option>
-          <option>Marketing</option>
-          <option>Engineering</option>
-          <option>Human Resources</option>
-          <option>Legal</option>
-        </select>
-        <button type="submit">Save</button>
-      </form>
+        <SelectInput
+          id="select-department"
+          label="Department"
+          name="department"
+          data={departments}
+        />
 
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-      >
-        <Box sx={modalStyle}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Employee Created!
-          </Typography>
-        </Box>
-      </Modal>
+        <button type="submit">Save</button>
+
+        <SuccessModal isVisible={isVisible} toggle={toggle} />
+      </form>
     </div>
   );
 }

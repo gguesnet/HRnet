@@ -50,3 +50,11 @@ export const states = [
   "Wisconsin",
   "Wyoming",
 ];
+
+export const departments = [
+  "Sales",
+  "Marketing",
+  "Engineering",
+  "Human Resources",
+  "Legal",
+];

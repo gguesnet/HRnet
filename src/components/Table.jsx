@@ -25,13 +25,19 @@ function Table() {
     <div className="App">
       <div className="container">
         <h2>Current Employees</h2>
-        <div style={{ height: 400, width: "100%" }}>
+        <div
+          style={{
+            height: 400,
+            width: "100%",
+            backgroundColor: "white",
+            borderRadius: "4px",
+          }}
+        >
           <DataGrid
             rows={rows}
             columns={columns}
             pageSize={30}
             rowsPerPageOptions={[30]}
-            checkboxSelection
           />
         </div>
         <Link to="/">Home</Link>
