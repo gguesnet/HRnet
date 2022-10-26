@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -15,6 +16,12 @@ const modalStyle = {
   p: 4,
 };
 
+/**
+ * @param {Boolean} isVisible - The visibility of the Modal
+ * @param {Boolean} toggle - The switch to show/hide the Modal
+ * @component
+ */
+
 function SuccessModal({ isVisible, toggle }) {
   return (
     <Modal
@@ -30,5 +37,10 @@ function SuccessModal({ isVisible, toggle }) {
     </Modal>
   );
 }
+
+SuccessModal.prototype = {
+  isVisible: PropTypes.bool.isRequired,
+  toggle: PropTypes.bool.isRequired,
+};
 
 export default SuccessModal;

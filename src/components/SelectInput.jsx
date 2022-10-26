@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Box from "@mui/material/Box";
+import PropTypes from "prop-types";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
@@ -11,6 +12,14 @@ function SelectInput({ id, label, name, data }) {
   const handleChange = (e) => {
     setSelectData(e.target.value);
   };
+
+  /**
+   * @param {Number} id - The ID of the Select Input
+   * @param {String} label - The label of the Select Input
+   * @param {String} name - The name of the Select Input
+   * @param {Array} data - The data of the Select Input
+   * @component
+   */
 
   return (
     <Box>
@@ -34,5 +43,12 @@ function SelectInput({ id, label, name, data }) {
     </Box>
   );
 }
+
+SelectInput.prototype = {
+  id: PropTypes.number.isRequired,
+  label: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  data: PropTypes.array.isRequired,
+};
 
 export default SelectInput;

@@ -1,4 +1,18 @@
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .title {
+  font-size: 2em;
+  color: white;
+  line-height: 1;
+  text-align: center;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -14,7 +28,58 @@
 }
 
 form {
+  background-color: white;
+  padding: 3rem;
   display: flex;
   flex-direction: column;
   gap: 2em;
+  border-radius: 4px;
+  animation: 1s fadeIn;
+}
+
+.info-fieldset {
+  padding: 20px;
+  border: 2px #ffbe00 dotted;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
+
+.address-fieldset {
+  padding: 20px;
+  border: 2px #ffbe00 dotted;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
+
+.save {
+  background: none;
+  overflow: hidden;
+  border: 3px solid #ffbe00;
+  font-family: "Arial";
+  font-size: 1rem;
+  color: #ffbe00;
+  cursor: pointer;
+  padding: 18px 70px;
+  margin: 0px 30px;
+  text-transform: uppercase;
+  transition: all 0.3s;
+  border-radius: 4rem;
+  font-weight: 700;
+}
+
+.save:after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  transition: all 0.3s;
+  box-sizing: border-box;
+}
+
+.save:hover {
+  background-color: #ffbe00;
+  color: white;
 }

@@ -57,29 +57,30 @@ function Form() {
       <h2>Create Employee</h2>
 
       <form action="#" id="create-employee" onSubmit={handleOnSubmit}>
-        <TextInput
-          id="firstname"
-          label="First Name"
-          minlength={1}
-          maxlength={17}
-          name="firstname"
-          type="text"
-        />
+        <fieldset className="info-fieldset">
+          <legend>Information</legend>
+          <TextInput
+            id="firstname"
+            label="First Name"
+            minlength={1}
+            maxlength={17}
+            name="firstname"
+          />
 
-        <TextInput
-          id="lastname"
-          label="Last Name"
-          minlength={1}
-          maxlength={17}
-          name="lastname"
-          type="text"
-        />
+          <TextInput
+            id="lastname"
+            label="Last Name"
+            minlength={1}
+            maxlength={17}
+            name="lastname"
+          />
 
-        <DateInput label="Date of Birth" name="birthdate" />
+          <DateInput label="Date of Birth" name="birthdate" />
 
-        <DateInput label="Start Date" name="startdate" />
+          <DateInput label="Start Date" name="startdate" />
+        </fieldset>
 
-        <fieldset>
+        <fieldset className="address-fieldset">
           <legend>Address</legend>
 
           <TextInput
@@ -88,7 +89,6 @@ function Form() {
             minlength={1}
             maxlength={17}
             name="street"
-            type="text"
           />
 
           <TextInput
@@ -97,7 +97,6 @@ function Form() {
             minlength={1}
             maxlength={17}
             name="city"
-            type="text"
           />
 
           <SelectInput
@@ -113,7 +112,6 @@ function Form() {
             minlength={5}
             maxlength={5}
             name="zipcode"
-            type="text"
           />
         </fieldset>
 
@@ -124,7 +122,9 @@ function Form() {
           data={departments}
         />
 
-        <button type="submit">Save</button>
+        <button type="submit" className="save">
+          Save
+        </button>
 
         <SuccessModal isVisible={isVisible} toggle={toggle} />
       </form>

@@ -1,3 +1,10 @@
+import PropTypes from "prop-types";
+
+/**
+ * @param {String} Title - The Title of the Title Component
+ * @component
+ */
+
 function Title({ title }) {
   return (
     <div className="title">
@@ -5,5 +12,9 @@ function Title({ title }) {
     </div>
   );
 }
+
+Title.prototype = {
+  title: PropTypes.string.isRequired,
+};
 
 export default Title;

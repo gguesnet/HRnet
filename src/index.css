@@ -1,7 +1,9 @@
 body {
-  min-height: 100vh;
   background: rgba(255, 198, 0, 0.9);
   margin: 0;
   box-sizing: border-box;
   font-family: Roboto, Helvetica, Arial, sans-serif;
+  background-attachment: fixed;
+  background-image: url(pattern.svg);
+  background-size: 500px;
 }
