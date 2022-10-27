@@ -7,6 +7,47 @@
   }
 }
 
+a {
+  height: 3rem;
+  color: #fff;
+  display: inline-block;
+  font-size: 1.5rem;
+  padding: 0.5rem 1rem;
+  position: relative;
+  text-decoration: none;
+  z-index: 10;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+}
+
+a::before {
+  background: white;
+  width: 100%;
+  content: "";
+  display: block;
+  position: absolute;
+  top: -2.5%;
+  left: 0;
+  z-index: -4;
+  height: 105%;
+  transform: rotate(2.7deg);
+}
+
+a::after {
+  background: #1b1b1b;
+  width: 100%;
+  height: 3rem;
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -4;
+}
+
+h1 {
+  margin-bottom: 1rem;
+}
+
 .title {
   font-size: 2em;
   color: white;
@@ -29,7 +70,7 @@
 
 form {
   background-color: white;
-  padding: 3rem;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
   gap: 2em;
@@ -37,7 +78,16 @@ form {
   animation: 1s fadeIn;
 }
 
+.responsive-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  gap: 1em;
+}
+
 .info-fieldset {
+  margin: 0;
   padding: 20px;
   border: 2px #ffbe00 dotted;
   border-radius: 4px;
@@ -47,6 +97,7 @@ form {
 }
 
 .address-fieldset {
+  margin: 0;
   padding: 20px;
   border: 2px #ffbe00 dotted;
   border-radius: 4px;
@@ -56,6 +107,7 @@ form {
 }
 
 .save {
+  display: block;
   background: none;
   overflow: hidden;
   border: 3px solid #ffbe00;
@@ -64,7 +116,7 @@ form {
   color: #ffbe00;
   cursor: pointer;
   padding: 18px 70px;
-  margin: 0px 30px;
+  margin: 0px auto;
   text-transform: uppercase;
   transition: all 0.3s;
   border-radius: 4rem;
@@ -82,4 +134,14 @@ form {
 .save:hover {
   background-color: #ffbe00;
   color: white;
+}
+
+.fade {
+  animation: 1s fadeIn;
+}
+
+@media screen and (min-width: 550px) {
+  .responsive-item {
+    flex-direction: row;
+  }
 }

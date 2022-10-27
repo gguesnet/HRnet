@@ -53,67 +53,69 @@ function Form() {
 
   return (
     <div className="container">
-      <Link to="/employee">View Current Employees</Link>
+      <Link to="/employee">View Current Employees →</Link>
       <h2>Create Employee</h2>
 
       <form action="#" id="create-employee" onSubmit={handleOnSubmit}>
-        <fieldset className="info-fieldset">
-          <legend>Information</legend>
-          <TextInput
-            id="firstname"
-            label="First Name"
-            minlength={1}
-            maxlength={17}
-            name="firstname"
-          />
+        <div className="responsive-item">
+          <fieldset className="info-fieldset">
+            <legend>Information</legend>
+            <TextInput
+              id="firstname"
+              label="First Name"
+              minlength={1}
+              maxlength={17}
+              name="firstname"
+            />
 
-          <TextInput
-            id="lastname"
-            label="Last Name"
-            minlength={1}
-            maxlength={17}
-            name="lastname"
-          />
+            <TextInput
+              id="lastname"
+              label="Last Name"
+              minlength={1}
+              maxlength={17}
+              name="lastname"
+            />
 
-          <DateInput label="Date of Birth" name="birthdate" />
+            <DateInput label="Date of Birth" name="birthdate" />
 
-          <DateInput label="Start Date" name="startdate" />
-        </fieldset>
+            <DateInput label="Start Date" name="startdate" />
+          </fieldset>
 
-        <fieldset className="address-fieldset">
-          <legend>Address</legend>
+          <fieldset className="address-fieldset">
+            <legend>Address</legend>
 
-          <TextInput
-            id="street"
-            label="Street"
-            minlength={1}
-            maxlength={17}
-            name="street"
-          />
+            <TextInput
+              id="street"
+              label="Street"
+              minlength={1}
+              maxlength={17}
+              name="street"
+            />
 
-          <TextInput
-            id="city"
-            label="City"
-            minlength={1}
-            maxlength={17}
-            name="city"
-          />
+            <TextInput
+              id="city"
+              label="City"
+              minlength={1}
+              maxlength={17}
+              name="city"
+            />
 
-          <SelectInput
-            id="select-state"
-            label="State"
-            name="state"
-            data={states}
-          />
+            <SelectInput
+              id="select-state"
+              label="State"
+              name="state"
+              data={states}
+            />
 
-          <TextInput
-            id="zipcode"
-            label="Zip Code"
-            minlength={5}
-            maxlength={5}
-            name="zipcode"
-          />
-        </fieldset>
+            <TextInput
+              id="zipcode"
+              label="Zip Code"
+              minlength={5}
+              maxlength={5}
+              name="zipcode"
+            />
+          </fieldset>
+        </div>
 
         <SelectInput
           id="select-department"

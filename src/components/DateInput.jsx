@@ -24,6 +24,7 @@ function DateInput({ label, name }) {
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <Stack spacing={3}>
         <DesktopDatePicker
+          fullwidth
           label={label}
           inputFormat="MM/DD/YYYY"
           value={dateValue}

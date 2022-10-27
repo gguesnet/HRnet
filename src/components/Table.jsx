@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { DataGrid } from "@mui/x-data-grid";
+import Box from "@mui/material/Box";
+import { DataGrid, GridToolbarQuickFilter } from "@mui/x-data-grid";
 import { store } from "../redux";
 
 const columns = [
@@ -14,18 +16,45 @@ const columns = [
   { field: "zipcode", headerName: "Zipcode", width: 100 },
 ];
 
+function QuickSearchToolbar() {
+  return (
+    <Box
+      sx={{
+        p: 0.5,
+        pt: 0.7,
+        pb: 0,
+        float: "right",
+      }}
+    >
+      <GridToolbarQuickFilter />
+    </Box>
+  );
+}
+
 function Table() {
   const data = store.getState().employeeDataHandler.employeeList;
-
   console.log(data);
 
-  const rows = data;
+  if (!data) {
+    return (
+      <div className="App">
+        <div className="container">
+          <h2>The table is empty</h2>
+          <Link to="/">Get Back Home →</Link>
+        </div>
+      </div>
+    );
+  }
+
+  const [pageSize, setPageSize] = useState(5);
+  console.log(data);
 
   return (
     <div className="App">
       <div className="container">
         <h2>Current Employees</h2>
         <div
+          className="fade"
           style={{
             height: 400,
             width: "100%",
@@ -34,13 +63,15 @@ function Table() {
           }}
         >
           <DataGrid
-            rows={rows}
+            pageSize={pageSize}
+            onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
+            rowsPerPageOptions={[5, 10, 20]}
+            rows={data}
             columns={columns}
-            pageSize={30}
-            rowsPerPageOptions={[30]}
+            components={{ Toolbar: QuickSearchToolbar }}
           />
         </div>
-        <Link to="/">Home</Link>
+        <Link to="/">Get Back Home →</Link>
       </div>
     </div>
   );
