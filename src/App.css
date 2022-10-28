@@ -140,6 +140,12 @@ form {
   animation: 1s fadeIn;
 }
 
+@media screen and (max-width: 360px) {
+  a {
+    font-size: 1.3rem;
+  }
+}
+
 @media screen and (min-width: 550px) {
   .responsive-item {
     flex-direction: row;

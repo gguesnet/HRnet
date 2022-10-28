@@ -58,3 +58,15 @@ export const departments = [
   "Human Resources",
   "Legal",
 ];
+
+export const columns = [
+  { field: "firstname", headerName: "First name", width: 100 },
+  { field: "lastname", headerName: "Last name", width: 100 },
+  { field: "startdate", headerName: "Start date", width: 100 },
+  { field: "department", headerName: "Department", width: 100 },
+  { field: "birthdate", headerName: "Birth Date", width: 100 },
+  { field: "street", headerName: "Street", width: 100 },
+  { field: "city", headerName: "City", width: 100 },
+  { field: "state", headerName: "State", width: 100 },
+  { field: "zipcode", headerName: "Zipcode", width: 100 },
+];
