@@ -4,16 +4,14 @@ import { states, departments } from "../helpers";
 import TextInput from "./TextInput";
 import SelectInput from "./SelectInput";
 import DateInput from "./DateInput";
-import SuccessModal from "./SuccessModal";
-
-function useToggle(defaultValue = false) {
-  const [value, setValue] = useState(defaultValue);
-  const toggleValue = () => setValue((prevValue) => !prevValue);
-  return [value, toggleValue];
-}
+import SuccessModal from "modal-oc-project-hrnet";
 
 function Form() {
-  const [isVisible, toggle] = useToggle();
+  const [modalShowing, setModalShowing] = useState(false);
+
+  function handleClick() {
+    setModalShowing(!modalShowing);
+  }
 
   async function handleOnSubmit(e) {
     e.preventDefault();
@@ -47,7 +45,7 @@ function Form() {
       window.localStorage.setItem("user", JSON.stringify(storage));
     }
 
-    toggle();
+    handleClick();
     e.target.reset();
   }
 
@@ -128,7 +126,13 @@ function Form() {
           Save
         </button>
 
-        <SuccessModal isVisible={isVisible} toggle={toggle} />
+        <SuccessModal
+          title="Success!"
+          text="Employee has been successfully added!"
+          button="Okay!"
+          toggleOpen={handleClick}
+          isOpen={modalShowing}
+        />
       </form>
     </div>
   );

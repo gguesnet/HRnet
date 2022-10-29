@@ -7,6 +7,17 @@
   }
 }
 
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translate(0, 15px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+
 a {
   height: 3rem;
   color: #fff;
@@ -138,6 +149,65 @@ form {
 
 .fade {
   animation: 1s fadeIn;
+}
+
+dialog {
+  padding: 0;
+  border: 1px solid black;
+  border-radius: 4px;
+  box-shadow: 0 0 3px black;
+  z-index: 1;
+}
+
+dialog[open] {
+  animation: slideUp 0.4s ease-out;
+}
+
+dialog {
+  max-width: 80vw;
+}
+
+.close {
+  background-color: transparent;
+  color: #464d54;
+  position: absolute;
+  top: 0.1em;
+  right: 0.2em;
+  padding: 0.3em;
+  line-height: 0.6;
+  border: 0;
+  font-size: 1.8em;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: black;
+}
+.modal-header,
+.modal-body,
+.modal-footer {
+  padding: 1em;
+}
+
+.modal-header {
+  color: #343a40;
+  font-family: "Arial";
+  margin: 0;
+  padding-bottom: 0.6em;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  border-bottom: 1px solid #e1e3e5;
+}
+
+.modal-footer {
+  border-top: 1px solid #e1e3e5;
+}
+
+:first-child {
+  margin-top: 0;
+}
+:last-child {
+  margin-bottom: 0;
 }
 
 @media screen and (max-width: 360px) {
