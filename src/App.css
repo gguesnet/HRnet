@@ -203,13 +203,6 @@ dialog {
   border-top: 1px solid #e1e3e5;
 }
 
-:first-child {
-  margin-top: 0;
-}
-:last-child {
-  margin-bottom: 0;
-}
-
 @media screen and (max-width: 360px) {
   a {
     font-size: 1.3rem;

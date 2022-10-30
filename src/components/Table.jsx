@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import { DataGrid, GridToolbarQuickFilter } from "@mui/x-data-grid";
-import { store } from "../redux";
+import { useSelector } from "react-redux";
 import { columns } from "../helpers";
 
 function QuickSearchToolbar() {
@@ -21,8 +21,7 @@ function QuickSearchToolbar() {
 }
 
 function Table() {
-  const data = store.getState().employeeDataHandler.employeeList;
-  console.log(data);
+  const data = useSelector((state) => state.employeeDataHandler);
 
   if (!data) {
     return (
@@ -36,7 +35,6 @@ function Table() {
   }
 
   const [pageSize, setPageSize] = useState(5);
-  console.log(data);
 
   return (
     <div className="App">
@@ -55,7 +53,7 @@ function Table() {
             pageSize={pageSize}
             onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
             rowsPerPageOptions={[5, 10, 20]}
-            rows={data}
+            rows={data.employeeList}
             columns={columns}
             components={{ Toolbar: QuickSearchToolbar }}
           />

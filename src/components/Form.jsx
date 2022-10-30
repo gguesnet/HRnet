@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addEmployee } from "../redux";
 import { states, departments } from "../helpers";
 import TextInput from "./TextInput";
 import SelectInput from "./SelectInput";
@@ -9,6 +11,9 @@ import SuccessModal from "modal-oc-project-hrnet";
 function Form() {
   const [modalShowing, setModalShowing] = useState(false);
 
+  const dispatch = useDispatch();
+  const stateData = useSelector((state) => state.employeeDataHandler);
+
   function handleClick() {
     setModalShowing(!modalShowing);
   }
@@ -17,32 +22,27 @@ function Form() {
     e.preventDefault();
 
     const form = new FormData(e.target);
-    const user = window.localStorage.getItem("user");
+    const user = stateData.employeeList;
+
     let count;
 
-    if (!user) {
+    if (user.length === 0) {
       count = 1;
     } else {
-      count = JSON.parse(user).length + 1;
+      count = user.length + 1;
     }
 
-    const data = { id: count };
-
-    console.log(count);
+    let data = { id: count };
 
     form.forEach((item, i) => {
-      console.log(item, i);
       let input = { [i]: item };
       Object.assign(data, input);
     });
 
-    console.log(data);
+    const array = [...user, data];
 
     if (data) {
-      const storage = JSON.parse(window.localStorage.getItem("user")) || [];
-      console.log(storage);
-      storage.push(data);
-      window.localStorage.setItem("user", JSON.stringify(storage));
+      dispatch(addEmployee({ employeeList: array }));
     }
 
     handleClick();
